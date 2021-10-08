@@ -4,7 +4,7 @@ type MainProps = {
   rentalOffersCount: number;
 }
 
-function Main({rentalOffersCount}: MainProps): JSX.Element {
+function MainScreen({rentalOffersCount}: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -111,4 +111,4 @@ function Main({rentalOffersCount}: MainProps): JSX.Element {
   );
 }
 
-export default Main;
+export default MainScreen;
