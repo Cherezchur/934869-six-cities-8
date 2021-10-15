@@ -1,7 +1,12 @@
-import Card from '../card/card';
 import Logo from '../logo/logo';
+import { Offers } from '../../types/offers';
+import LocationItem from './location-item';
 
-function FavoritesScreen(): JSX.Element {
+type FavoriteProps = {
+  offers: Offers;
+}
+
+function FavoritesScreen({offers}:FavoriteProps): JSX.Element {
   return (
     <div className="page">
       <header className="header">
@@ -35,32 +40,30 @@ function FavoritesScreen(): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href="#">
-                      <span>Amsterdam</span>
-                    </a>
-                  </div>
-                </div>
-                <div className="favorites__places">
-                  <Card />
-                  <Card />
-                </div>
-              </li>
-
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href="#">
-                      <span>Cologne</span>
-                    </a>
-                  </div>
-                </div>
-                <div className="favorites__places">
-                  <Card />
-                </div>
-              </li>
+              <LocationItem
+                offers={offers}
+                location={'Paris'}
+              />
+              <LocationItem
+                offers={offers}
+                location={'Cologne'}
+              />
+              <LocationItem
+                offers={offers}
+                location={'Brussels'}
+              />
+              <LocationItem
+                offers={offers}
+                location={'Amsterdam'}
+              />
+              <LocationItem
+                offers={offers}
+                location={'Hamburg'}
+              />
+              <LocationItem
+                offers={offers}
+                location={'Dusseldorf'}
+              />
             </ul>
           </section>
         </div>
