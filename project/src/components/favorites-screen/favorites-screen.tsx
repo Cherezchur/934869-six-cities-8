@@ -7,6 +7,36 @@ type FavoriteProps = {
 }
 
 function FavoritesScreen({offers}:FavoriteProps): JSX.Element {
+  // const ParisOffers = [offer];
+  // const CologneOffers = [offer];
+  // const BrusselsOffers = [offer];
+  // const AmsterdamOffers = [offer];
+  // const HamburgOffers = [offer];
+  // const DusseldorfOffers = [offer];
+
+  // offers.forEach((offer) => {
+  //   switch (offer.city) {
+  //     case 'Paris':
+  //       ParisOffers.push(offer);
+  //       break;
+  //     case 'Cologne':
+  //       CologneOffers.push(offer);
+  //       break;
+  //     case 'Brussel':
+  //       BrusselsOffers.push(offer);
+  //       break;
+  //     case 'Amsterdam':
+  //       AmsterdamOffers.push(offer);
+  //       break;
+  //     case 'Hamburg':
+  //       HamburgOffers.push(offer);
+  //       break;
+  //     case 'Dusseldorf':
+  //       DusseldorfOffers.push(offer);
+  //       break;
+  //   }
+  // });
+
   return (
     <div className="page">
       <header className="header">
@@ -40,10 +70,6 @@ function FavoritesScreen({offers}:FavoriteProps): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <LocationItem
-                offers={offers}
-                location={'Paris'}
-              />
               <LocationItem
                 offers={offers}
                 location={'Cologne'}

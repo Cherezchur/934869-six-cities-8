@@ -7,7 +7,6 @@ type LocationItemProps = {
 }
 
 function LocationItem({offers, location}: LocationItemProps): JSX.Element {
-  console.log(offers);
 
   const localOffers:Offers = [];
 
@@ -17,7 +16,7 @@ function LocationItem({offers, location}: LocationItemProps): JSX.Element {
     }
   });
 
-  return (
+  return localOffers.length > 0 ? (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
@@ -38,7 +37,7 @@ function LocationItem({offers, location}: LocationItemProps): JSX.Element {
         })}
       </div>
     </li>
-  );
+  ) : (<li className="visually-hidden"></li>);
 }
 
 export default LocationItem;

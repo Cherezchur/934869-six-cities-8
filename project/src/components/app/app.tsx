@@ -6,7 +6,7 @@ import RoomScreen from '../room-screen/room-screen';
 import SingInScreen from '../sing-in-screen/sing-in-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-import { Offers } from '../../types/offers';
+import { Offers} from '../../types/offers';
 
 
 type AppProps = {
@@ -32,7 +32,9 @@ function App({rentalOffersCount, offers}: AppProps): JSX.Element {
           authorizationStatus={AuthorizationStatus.Auth}
         />
         <Route exact path={AppRoute.Room}>
-          <RoomScreen />
+          <RoomScreen
+            offers={offers}
+          />
         </Route>
         <Route exact path={AppRoute.SignIn}>
           <SingInScreen />

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Offer } from '../../types/offers';
 
 type CardProps = {
@@ -7,12 +8,10 @@ type CardProps = {
 function Card(props: CardProps): JSX.Element {
   const {offer} = props;
 
-  console.log('render?');
-
   return (
     <div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <a href='#'>
           <img className="place-card__image" src={offer.photo[0]} width="260" height="200" alt="Place image" />
         </a>
       </div>
@@ -36,7 +35,12 @@ function Card(props: CardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <Link to={{
+            pathname: `offer/${offer.id}`,
+          }}
+          >
+            {offer.title}
+          </Link>
         </h2>
         <p className="place-card__type">{offer.housingType}</p>
       </div>
