@@ -1,6 +1,7 @@
 import Logo from '../logo/logo';
 import { Offers } from '../../types/offers';
 import LocationItem from './location-item';
+import { Locations}  from '../../const';
 
 type FavoriteProps = {
   offers: Offers;
@@ -41,26 +42,15 @@ function FavoritesScreen({offers}:FavoriteProps): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <LocationItem
-                offers={offers}
-                location={'Cologne'}
-              />
-              <LocationItem
-                offers={offers}
-                location={'Brussels'}
-              />
-              <LocationItem
-                offers={offers}
-                location={'Amsterdam'}
-              />
-              <LocationItem
-                offers={offers}
-                location={'Hamburg'}
-              />
-              <LocationItem
-                offers={offers}
-                location={'Dusseldorf'}
-              />
+              {Locations.map((city) => {
+                const keyValue = city;
+                return (
+                  <LocationItem
+                    key={keyValue}
+                    offers={offers}
+                    location={city}
+                  />);
+              })}
             </ul>
           </section>
         </div>
