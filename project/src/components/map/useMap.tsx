@@ -1,10 +1,11 @@
 import {useEffect, useState} from 'react';
 import leaflet from 'leaflet';
+import { City } from '../../types/city';
 
-function useMap(mapRef, city) {
-  const [map, setMap] = useState(null);
+function useMap(mapRef:any, city:City):any {
+  const [map, setMap] = useState<any>(null);
 
-  useEffect(() => {
+  useEffect(():void => {
     if (mapRef.current !== null && map === null) {
       const instance = leaflet.map(mapRef.current, {
         center: {

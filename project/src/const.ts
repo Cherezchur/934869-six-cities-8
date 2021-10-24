@@ -13,6 +13,6 @@ export enum AuthorizationStatus {
 
 export const Locations: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
-export const URL_MARKER_DEFAULT = '../public/img/pin.svg';
+export const URL_MARKER_DEFAULT = '../img/pin.svg';
 
-export const URL_MARKER_CURRENT = '../public/img/pin-active.svg';
+export const URL_MARKER_CURRENT = '../img/pin-active.svg';

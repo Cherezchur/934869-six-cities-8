@@ -28,6 +28,7 @@ function Map({city, points}: MapProps) {
   // });
 
   useEffect(() => {
+    console.log(map);
     if (map) {
       points.forEach((point) => {
         leaflet

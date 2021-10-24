@@ -11,6 +11,10 @@ type MainProps = {
 
 function MainScreen({rentalOffersCount, offers, cities}: MainProps): JSX.Element {
 
+  // const onOfferHover = (offersId) => {
+
+  // }
+
   const points:Location[] = [];
 
   const currentCity:City = cities[0];
@@ -19,8 +23,6 @@ function MainScreen({rentalOffersCount, offers, cities}: MainProps): JSX.Element
     points.push(offer.location);
     return points;
   });
-
-  console.log(points);
 
   return (
     <div className="page page--gray page--main">

@@ -1,10 +1,12 @@
-import { City } from '../types/city';
+import { Cities } from '../types/city';
 
-export const city: City= [
+const cities: Cities= [
   {
     name: 'Amsterdam',
     lat: 52.3740300,
     lng: 4.8896900,
-    zoom: 8,
+    zoom: 12,
   },
 ];
+
+export default cities;
