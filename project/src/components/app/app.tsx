@@ -7,14 +7,16 @@ import SingInScreen from '../sing-in-screen/sing-in-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import { Offers} from '../../types/offers';
+import { Cities } from '../../types/city';
 
 
 type AppProps = {
   rentalOffersCount: number;
   offers: Offers;
+  cities: Cities;
 }
 
-function App({rentalOffersCount, offers}: AppProps): JSX.Element {
+function App({rentalOffersCount, offers, cities}: AppProps): JSX.Element {
 
   return (
     <BrowserRouter>
@@ -23,6 +25,7 @@ function App({rentalOffersCount, offers}: AppProps): JSX.Element {
           <MainScreen
             rentalOffersCount={rentalOffersCount}
             offers={offers}
+            cities={cities}
           />
         </Route>
         <PrivateRoute

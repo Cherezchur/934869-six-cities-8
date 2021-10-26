@@ -7,8 +7,6 @@ type CardProps = {
 function FavoritesCard(props: CardProps): JSX.Element {
   const {offer} = props;
 
-  console.log('render?', offer);
-
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">

@@ -1,12 +1,29 @@
 import OffersList from './offers-list';
-import { Offers} from '../../types/offers';
+import { Offers, Location} from '../../types/offers';
+import Map from '../map/map';
+import { Cities, City } from '../../types/city';
 
 type MainProps = {
   rentalOffersCount: number;
   offers: Offers;
+  cities: Cities;
 }
 
-function MainScreen({rentalOffersCount, offers}: MainProps): JSX.Element {
+function MainScreen({rentalOffersCount, offers, cities}: MainProps): JSX.Element {
+
+  // const onOfferHover = (offersId) => {
+
+  // }
+
+  const points:Location[] = [];
+
+  const currentCity:City = cities[0];
+
+  offers.forEach((offer) => {
+    points.push(offer.location);
+    return points;
+  });
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -100,7 +117,7 @@ function MainScreen({rentalOffersCount, offers}: MainProps): JSX.Element {
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map city={currentCity} points={points} />
             </div>
           </div>
         </div>

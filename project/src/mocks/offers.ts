@@ -34,6 +34,11 @@ export const offers: Offers = [
       name: 'Kristina',
       isPro: true,
     },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
     reviews: [
       {
         avatar: 'img/avatar-max.jpg',
@@ -85,6 +90,11 @@ export const offers: Offers = [
       name: 'Luana',
       isPro: false,
     },
+    location: {
+      latitude: 52.369553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
     reviews: [
       {
         avatar: 'img/avatar-max.jpg',
@@ -104,7 +114,7 @@ export const offers: Offers = [
   },
   {
     id: 3,
-    city: 'Paris',
+    city: 'Amsterdam',
     photo: [
       'img/apartment-01.jpg',
       'img/apartment-02.jpg',
@@ -134,6 +144,11 @@ export const offers: Offers = [
       avatar: 'img/avatar-angelina.jpg',
       name: 'Kristina',
       isPro: true,
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 8,
     },
     reviews: [
       {
@@ -175,7 +190,7 @@ export const offers: Offers = [
   },
   {
     id: 4,
-    city: 'Cologne',
+    city: 'Amsterdam',
     photo: [
       'img/apartment-01.jpg',
       'img/apartment-02.jpg',
@@ -205,6 +220,11 @@ export const offers: Offers = [
       avatar: 'img/avatar-angelina.jpg',
       name: 'Kristina',
       isPro: true,
+    },
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 8,
     },
     reviews: [
       {

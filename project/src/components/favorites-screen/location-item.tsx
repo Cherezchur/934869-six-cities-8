@@ -8,15 +8,11 @@ type LocationItemProps = {
 
 function LocationItem({offers, location}: LocationItemProps): JSX.Element {
 
-  const localOffers:Offers = [];
+  const locationOffers:Offers = offers.filter((offer) => offer.city === location);
 
-  offers.forEach((offer) => {
-    if(location === offer.city) {
-      localOffers.push(offer);
-    }
-  });
+  console.log(locationOffers);
 
-  return localOffers.length > 0 ? (
+  return locationOffers.length > 0 ? (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
@@ -26,12 +22,12 @@ function LocationItem({offers, location}: LocationItemProps): JSX.Element {
         </div>
       </div>
       <div className="favorites__places">
-        {localOffers.map((offer) => {
+        {locationOffers.map((offer) => {
           const keyValue = offer.id;
           return (
             <FavoritesCard
               key={keyValue}
-              offer = {offer}
+              offer={offer}
             />
           );
         })}

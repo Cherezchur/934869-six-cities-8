@@ -11,7 +11,8 @@ type RoomScreenProps = {
 function RoomScreen(props: RoomScreenProps): JSX.Element {
   const {offers} = props;
   const {id} = useParams<{id:string}>();
-  const offer = offers[(+id) - 1];
+  const offer = offers[(+id)];
+
   const {photo, title, rating, housingType, bedroomsNumber, guestsMax,
     cost, householdItems, ownerInformation, description, reviews} = offer;
 

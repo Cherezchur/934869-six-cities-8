@@ -10,6 +10,12 @@ export type OwnerInformation = {
   isPro: boolean;
 }
 
+export type Location = {
+  latitude: number,
+  longitude: number,
+  zoom: number
+}
+
 export type Offer = {
   id: number;
   city: string;
@@ -24,6 +30,7 @@ export type Offer = {
   cost: number;
   householdItems: HouseholdItems[];
   ownerInformation: OwnerInformation;
+  location: Location;
   reviews: Reviews;
 }
 

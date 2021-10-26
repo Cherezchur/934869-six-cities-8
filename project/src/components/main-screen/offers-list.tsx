@@ -7,7 +7,6 @@ type OffersListProps = {
 }
 
 function OffersList({offers}: OffersListProps): JSX.Element {
-  console.log(offers);
 
   const [activeCardId, setActiveCardId] = useState('');
 
