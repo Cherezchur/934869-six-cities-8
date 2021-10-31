@@ -7,13 +7,13 @@ import { Location } from '../../types/offers';
 import { City } from '../../types/city';
 
 type MapProps = {
-  city: City,
+  location: City,
   points: Location[],
 }
 
-function Map({city, points}: MapProps) {
+function Map({location, points}: MapProps) {
   const mapRef = useRef<HTMLElement>(null);
-  const map = useMap(mapRef, city);
+  const map = useMap(mapRef, location);
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
@@ -28,7 +28,6 @@ function Map({city, points}: MapProps) {
   // });
 
   useEffect(() => {
-    console.log(map);
     if (map) {
       points.forEach((point) => {
         leaflet

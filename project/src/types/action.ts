@@ -1,17 +1,17 @@
-import { Offers } from './offers';
+import { Offers } from '../types/offers';
 
 export enum ActionType {
-  changeCity = 'manePage/changeCity',
-  fillingRentalList = 'manePage/fillingRentalList',
+  ChangeCity = 'manePage/changeCity',
+  FillingRentalList = 'manePage/fillingRentalList',
 }
 
 export type ChangeCity = {
-  type: ActionType.changeCity;
+  type: ActionType.ChangeCity;
   payload: string;
 };
 
 export type FillingRentalList = {
-  type: ActionType.fillingRentalList;
+  type: ActionType.FillingRentalList;
   payload: Offers;
 };
 

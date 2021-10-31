@@ -3,7 +3,7 @@ import { Offers } from '../types/offers';
 export const offers: Offers = [
   {
     id: 1,
-    city: 'Amsterdam',
+    city: 'Paris',
     photo: [
       'img/apartment-01.jpg',
       'img/apartment-02.jpg',

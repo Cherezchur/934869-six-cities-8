@@ -16,6 +16,8 @@ export type Location = {
   zoom: number
 }
 
+export type Locations = Location[]
+
 export type Offer = {
   id: number;
   city: string;

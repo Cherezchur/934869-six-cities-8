@@ -1,12 +1,12 @@
 import { ActionType, ChangeCity, FillingRentalList } from '../types/action';
-import { Offers } from '../types/offers';
+import { offers } from '../mocks/offers';
 
 export const changeCity = (city: string): ChangeCity => ({
-  type: ActionType.changeCity,
+  type: ActionType.ChangeCity,
   payload: city,
 });
 
-export const fillingRentalList = (offers: Offers): FillingRentalList => ({
-  type: ActionType.fillingRentalList,
+export const fillingRentalList = (): FillingRentalList => ({
+  type: ActionType.FillingRentalList,
   payload: offers,
 });
