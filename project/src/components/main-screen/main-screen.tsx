@@ -3,13 +3,13 @@ import {Offers, Locations} from '../../types/offers';
 import Map from '../map/map';
 import { Cities, City } from '../../types/city';
 import LocationList from './location-list';
-// import { useState } from 'react';
+import { useState } from 'react';
 import {Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {fillingRentalList} from '../../store/action';
 import {State} from '../../types/state';
 import {Actions} from '../../types/action';
-
+import SortList from './sort-list';
 
 type MainProps = {
   cities: Cities;
@@ -37,8 +37,11 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
   const locations:string[] = [];
   const points:Locations = [];
   const localOffers:Offers = [];
+  const [selectedSort, setSelectedSort] = useState('Popular');
   // const [selectedPoint, setSelectedPoint] = useState<Location | undefined>(undefined);
   let currentLocation:City;
+
+  const onSortItemClick = (sortItem: string) => setSelectedSort(sortItem);
 
   onOffers();
 
@@ -107,22 +110,12 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{localOffers.length} places to stay in {city}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
-              </form>
+              <SortList
+                onSortItemClick={onSortItemClick}
+                currentSort={selectedSort}
+              />
               <OffersList
+                currentSort={selectedSort}
                 localOffers={localOffers}
               />
             </section>
