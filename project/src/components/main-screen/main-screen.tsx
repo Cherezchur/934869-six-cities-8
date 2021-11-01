@@ -1,5 +1,5 @@
 import OffersList from './offers-list';
-import {Offers, Locations} from '../../types/offers';
+import {Offers, Locations, Location} from '../../types/offers';
 import Map from '../map/map';
 import { Cities, City } from '../../types/city';
 import LocationList from './location-list';
@@ -38,7 +38,8 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
   const points:Locations = [];
   const localOffers:Offers = [];
   const [selectedSort, setSelectedSort] = useState('Popular');
-  // const [selectedPoint, setSelectedPoint] = useState<Location | undefined>(undefined);
+  const [selectedPoint, setSelectedPoint] = useState<Location | undefined>(undefined);
+
   let currentLocation:City;
 
   const onSortItemClick = (sortItem: string) => setSelectedSort(sortItem);
@@ -64,6 +65,12 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
       points.push(offer.location);
     }
   });
+
+  const onListItemHover = (listItemId: number) => {
+    const currentOffer = offers.find((offer) => offer.id === listItemId);
+    const currentPoint = currentOffer?.location;
+    setSelectedPoint(currentPoint);
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -117,12 +124,14 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
               <OffersList
                 currentSort={selectedSort}
                 localOffers={localOffers}
+                onListItemHover={onListItemHover}
               />
             </section>
             <div className="cities__right-section">
               <Map
                 location={getCurrentLocation()}
                 points={points}
+                selectedPoint={selectedPoint}
               />
             </div>
           </div>

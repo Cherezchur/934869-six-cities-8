@@ -1,16 +1,14 @@
 import { Offers } from '../../types/offers';
 import Card from '../card/card';
-import {useState } from 'react';
 import { sortLowToHigh, sortHighToLow, sortRatedLow} from '../../utils';
 
 type OffersListProps = {
   localOffers: Offers;
   currentSort: string;
+  onListItemHover: (listItemId: number) => void
 }
 
-function OffersList({localOffers, currentSort}: OffersListProps): JSX.Element {
-
-  const [activeCardId, setActiveCardId] = useState('');
+function OffersList({localOffers, currentSort, onListItemHover}: OffersListProps): JSX.Element {
 
   let sortsOffers:Offers = localOffers;
 
@@ -37,7 +35,7 @@ function OffersList({localOffers, currentSort}: OffersListProps): JSX.Element {
           return (
             <article
               key={keyValue}
-              onMouseOver={() => setActiveCardId(`${activeCardId + keyValue}`.slice(activeCardId.length))}
+              onMouseOver={() => onListItemHover(offer.id)}
               className="cities__place-card place-card"
             >
               <Card
