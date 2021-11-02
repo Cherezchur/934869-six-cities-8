@@ -34,17 +34,18 @@ type ConnectedComponentProps = PropsFromRedux & MainProps;
 function MainScreen(props: ConnectedComponentProps): JSX.Element {
 
   const {cities, city, offers, onOffers} = props;
-  const locations:string[] = [];
+  const locations:string[] = cities.map((localCity) => localCity.name);
+  console.log(cities);
   const points:Locations = [];
   const localOffers:Offers = [];
   const [selectedSort, setSelectedSort] = useState('Popular');
   const [selectedPoint, setSelectedPoint] = useState<Location | undefined>(undefined);
 
-  let currentLocation:City;
-
   const onSortItemClick = (sortItem: string) => setSelectedSort(sortItem);
 
   onOffers();
+
+  let currentLocation:City;
 
   const getCurrentLocation = ():City => {
     cities.forEach((localCity) => {
@@ -54,10 +55,6 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
     });
     return currentLocation;
   };
-
-  cities.forEach((localCity) => {
-    locations.push(localCity.name);
-  });
 
   offers.forEach((offer) => {
     if(offer.city === city){
