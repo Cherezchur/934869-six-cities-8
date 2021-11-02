@@ -11,20 +11,17 @@ import { Cities } from '../../types/city';
 
 
 type AppProps = {
-  rentalOffersCount: number;
   offers: Offers;
   cities: Cities;
 }
 
-function App({rentalOffersCount, offers, cities}: AppProps): JSX.Element {
+function App({offers, cities}: AppProps): JSX.Element {
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Main}>
           <MainScreen
-            rentalOffersCount={rentalOffersCount}
-            offers={offers}
             cities={cities}
           />
         </Route>

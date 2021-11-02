@@ -3,7 +3,7 @@ import { Offers } from '../types/offers';
 export const offers: Offers = [
   {
     id: 1,
-    city: 'Amsterdam',
+    city: 'Paris',
     photo: [
       'img/apartment-01.jpg',
       'img/apartment-02.jpg',
@@ -35,8 +35,8 @@ export const offers: Offers = [
       isPro: true,
     },
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.85309666406198,
+      latitude: 48.8534100,
+      longitude: 2.3488000,
       zoom: 8,
     },
     reviews: [
