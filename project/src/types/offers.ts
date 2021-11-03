@@ -1,6 +1,6 @@
 import { Reviews } from './reviews';
 
-export type Photo = string;
+export type Image = string;
 
 export type HouseholdItems = string;
 
@@ -16,24 +16,35 @@ export type Location = {
   zoom: number
 }
 
+export type city = {
+  location: Location;
+  name: string;
+}
+
 export type Locations = Location[]
 
 export type Offer = {
   id: number;
-  city: string;
-  photo: Photo[];
+  city: city;
+  images: Image[];
+  previewImage: Image;
   title: string;
   description: string;
-  premium: boolean;
-  housingType: string;
+  isPremium: boolean;
+  isFavorite: boolean;
+  type: string;
   rating: number;
-  bedroomsNumber: number;
+  bedrooms: number;
   guestsMax: number;
-  cost: number;
+  price: number;
   householdItems: HouseholdItems[];
   ownerInformation: OwnerInformation;
   location: Location;
   reviews: Reviews;
+  ['is_favorite']?: boolean;
+  ['is_premium']?: boolean;
+  ['max_adults']?: number;
+  ['preview_image']?: string;
 }
 
 export type Offers = Offer[];

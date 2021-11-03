@@ -1,18 +1,33 @@
-import { Offers } from '../types/offers';
+import {
+  ThunkAction,
+  ThunkDispatch
+} from 'redux-thunk';
+import {
+  AxiosInstance
+} from 'axios';
+import {State} from '../types/state';
+
+import {
+  changeCity,
+  loadRentalList,
+  requireAuthorization,
+  requireLogout
+} from '../store/action';
+
 
 export enum ActionType {
   ChangeCity = 'manePage/changeCity',
-  FillingRentalList = 'manePage/fillingRentalList',
+  LoadRentalList = 'data/loadRentalList',
+  RequireAuthorization = 'user/requireAuthorization',
+  RequireLogout = 'user/requireLogout',
 }
 
-export type ChangeCity = {
-  type: ActionType.ChangeCity;
-  payload: string;
-};
+export type Actions =
+  | ReturnType<typeof changeCity>
+  | ReturnType<typeof loadRentalList>
+  | ReturnType<typeof requireAuthorization>
+  | ReturnType<typeof requireLogout>;
 
-export type FillingRentalList = {
-  type: ActionType.FillingRentalList;
-  payload: Offers;
-};
+export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Actions>;
 
-export type Actions = ChangeCity | FillingRentalList;
+export type ThunkAppDispatch = ThunkDispatch<State, AxiosInstance, Actions>;

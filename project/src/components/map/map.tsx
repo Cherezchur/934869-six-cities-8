@@ -16,8 +16,6 @@ function Map({location, points, selectedPoint}: MapProps) {
   const mapRef = useRef<HTMLElement>(null);
   const map = useMap(mapRef, location);
 
-  console.log(points);
-
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
     iconSize: [40, 40],

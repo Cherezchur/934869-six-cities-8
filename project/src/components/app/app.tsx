@@ -1,3 +1,4 @@
+import {connect, ConnectedProps} from 'react-redux';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import MainScreen from '../main-screen/main-screen';
@@ -6,35 +7,43 @@ import RoomScreen from '../room-screen/room-screen';
 import SingInScreen from '../sing-in-screen/sing-in-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-import { Offers} from '../../types/offers';
-import { Cities } from '../../types/city';
+import LoadingScreen from '../loading-screen/loading-screen';
+import {isCheckedAuth} from '../../utils';
+import {State} from '../../types/state';
 
+const mapStateToProps = ({authorizationStatus, isDataLoaded}: State) => ({
+  authorizationStatus,
+  isDataLoaded,
+});
 
-type AppProps = {
-  offers: Offers;
-  cities: Cities;
-}
+const connector = connect(mapStateToProps);
 
-function App({offers, cities}: AppProps): JSX.Element {
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function App(props: PropsFromRedux): JSX.Element {
+
+  const {authorizationStatus, isDataLoaded} = props;
+
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Main}>
-          <MainScreen
-            cities={cities}
-          />
+          <MainScreen />
         </Route>
         <PrivateRoute
           exact
           path={AppRoute.Favorites}
-          render={() => <FavoritesScreen offers={offers} />}
-          authorizationStatus={AuthorizationStatus.Auth}
+          render={() => <FavoritesScreen />}
+          authorizationStatus={AuthorizationStatus.NoAuth}
         />
         <Route exact path={AppRoute.Room}>
-          <RoomScreen
-            offers={offers}
-          />
+          <RoomScreen />
         </Route>
         <Route exact path={AppRoute.SignIn}>
           <SingInScreen />
@@ -47,4 +56,5 @@ function App({offers, cities}: AppProps): JSX.Element {
   );
 }
 
-export default App;
+export {App};
+export default connector(App);

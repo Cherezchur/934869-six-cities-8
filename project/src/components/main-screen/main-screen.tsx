@@ -1,39 +1,37 @@
 import OffersList from './offers-list';
-import {Offers, Locations, Location} from '../../types/offers';
+import {Offers, Locations, Location } from '../../types/offers';
 import Map from '../map/map';
-import { Cities, City } from '../../types/city';
+import { City } from '../../types/city';
 import LocationList from './location-list';
 import { useState } from 'react';
-import {Dispatch} from 'redux';
+// import {Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
-import {fillingRentalList} from '../../store/action';
+// import {loadRentalList} from '../../store/action';
 import {State} from '../../types/state';
-import {Actions} from '../../types/action';
+// import {Actions} from '../../types/action';
 import SortList from './sort-list';
+import { cities } from '../../const';
 
-type MainProps = {
-  cities: Cities;
-}
 
 const mapStateToProps = ({city, offers}: State) => ({
   city,
   offers,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
-  onOffers() {
-    dispatch(fillingRentalList());
-  },
-});
+// const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
+//   onOffers(offers: Offers) {
+//     dispatch(loadRentalList(offers));
+//   },
+// });
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
-type ConnectedComponentProps = PropsFromRedux & MainProps;
+type ConnectedComponentProps = PropsFromRedux;
 
 function MainScreen(props: ConnectedComponentProps): JSX.Element {
 
-  const {cities, city, offers, onOffers} = props;
+  const {city, offers} = props;
   const locations:string[] = [];
   const points:Locations = [];
   const localOffers:Offers = [];
@@ -42,9 +40,22 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
 
   let currentLocation:City;
 
-  const onSortItemClick = (sortItem: string) => setSelectedSort(sortItem);
+  const adaptedOffers = offers.map((offer) => {
+    const adaptedOffer = Object.assign(
+      {},
+      offer,
+      {
+        isFavorite: offer['is_favorite'],
+        isPremium: offer['is_premium'],
+        maxAdults: offer['max_adults'],
+        previewImage: offer['preview_image'],
+      },
+    );
 
-  onOffers();
+    return adaptedOffer;
+  });
+
+  const onSortItemClick = (sortItem: string) => setSelectedSort(sortItem);
 
   const getCurrentLocation = ():City => {
     cities.forEach((localCity) => {
@@ -59,8 +70,8 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
     locations.push(localCity.name);
   });
 
-  offers.forEach((offer) => {
-    if(offer.city === city){
+  adaptedOffers.forEach((offer) => {
+    if(offer.city.name === city){
       localOffers.push(offer);
       points.push(offer.location);
     }

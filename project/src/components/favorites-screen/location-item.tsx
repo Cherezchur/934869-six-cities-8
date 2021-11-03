@@ -3,16 +3,12 @@ import FavoritesCard from '../card/favorites-card';
 
 type LocationItemProps = {
   offers: Offers;
-  location: string ;
+  location: string;
 }
 
 function LocationItem({offers, location}: LocationItemProps): JSX.Element {
 
-  const locationOffers:Offers = offers.filter((offer) => offer.city === location);
-
-  console.log(locationOffers);
-
-  return locationOffers.length > 0 ? (
+  return offers.length > 0 ? (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
@@ -22,7 +18,7 @@ function LocationItem({offers, location}: LocationItemProps): JSX.Element {
         </div>
       </div>
       <div className="favorites__places">
-        {locationOffers.map((offer) => {
+        {offers.map((offer) => {
           const keyValue = offer.id;
           return (
             <FavoritesCard
