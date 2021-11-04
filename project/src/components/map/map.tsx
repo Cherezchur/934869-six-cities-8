@@ -36,6 +36,12 @@ function Map({location, points, selectedPoint}: MapProps) {
     map?.setView(location);
   }, [map, location]);
 
+  const markerGroup = new LayerGroup();
+
+  useEffect(() => {
+    map?.setView(location);
+  }, [map, location]);
+
   useEffect(() => {
     if (map) {
       points.forEach((point) => {
@@ -64,3 +70,4 @@ function Map({location, points, selectedPoint}: MapProps) {
 }
 
 export default Map;
+
