@@ -1,15 +1,15 @@
 import OffersList from './offers-list';
-import {Offers, Locations} from '../../types/offers';
+import {Offers, Locations, Location} from '../../types/offers';
 import Map from '../map/map';
 import { Cities, City } from '../../types/city';
 import LocationList from './location-list';
-// import { useState } from 'react';
+import { useState } from 'react';
 import {Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {fillingRentalList} from '../../store/action';
 import {State} from '../../types/state';
 import {Actions} from '../../types/action';
-
+import SortList from './sort-list';
 
 type MainProps = {
   cities: Cities;
@@ -34,13 +34,18 @@ type ConnectedComponentProps = PropsFromRedux & MainProps;
 function MainScreen(props: ConnectedComponentProps): JSX.Element {
 
   const {cities, city, offers, onOffers} = props;
-  const locations:string[] = [];
+  const locations:string[] = cities.map((localCity) => localCity.name);
+  console.log(cities);
   const points:Locations = [];
   const localOffers:Offers = [];
-  // const [selectedPoint, setSelectedPoint] = useState<Location | undefined>(undefined);
-  let currentLocation:City;
+  const [selectedSort, setSelectedSort] = useState('Popular');
+  const [selectedPoint, setSelectedPoint] = useState<Location | undefined>(undefined);
+
+  const onSortItemClick = (sortItem: string) => setSelectedSort(sortItem);
 
   onOffers();
+
+  let currentLocation:City;
 
   const getCurrentLocation = ():City => {
     cities.forEach((localCity) => {
@@ -51,16 +56,18 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
     return currentLocation;
   };
 
-  cities.forEach((localCity) => {
-    locations.push(localCity.name);
-  });
-
   offers.forEach((offer) => {
     if(offer.city === city){
       localOffers.push(offer);
       points.push(offer.location);
     }
   });
+
+  const onListItemHover = (listItemId: number) => {
+    const currentOffer = offers.find((offer) => offer.id === listItemId);
+    const currentPoint = currentOffer?.location;
+    setSelectedPoint(currentPoint);
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -107,29 +114,21 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{localOffers.length} places to stay in {city}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
-              </form>
+              <SortList
+                onSortItemClick={onSortItemClick}
+                currentSort={selectedSort}
+              />
               <OffersList
+                currentSort={selectedSort}
                 localOffers={localOffers}
+                onListItemHover={onListItemHover}
               />
             </section>
             <div className="cities__right-section">
               <Map
                 location={getCurrentLocation()}
                 points={points}
+                selectedPoint={selectedPoint}
               />
             </div>
           </div>
