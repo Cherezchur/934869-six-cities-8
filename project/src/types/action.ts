@@ -11,7 +11,8 @@ import {
   changeCity,
   loadRentalList,
   requireAuthorization,
-  requireLogout
+  requireLogout,
+  redirectToRoute
 } from '../store/action';
 
 
@@ -20,13 +21,15 @@ export enum ActionType {
   LoadRentalList = 'data/loadRentalList',
   RequireAuthorization = 'user/requireAuthorization',
   RequireLogout = 'user/requireLogout',
+  RedirectToRoute = 'page/redirectToRoute'
 }
 
 export type Actions =
   | ReturnType<typeof changeCity>
   | ReturnType<typeof loadRentalList>
   | ReturnType<typeof requireAuthorization>
-  | ReturnType<typeof requireLogout>;
+  | ReturnType<typeof requireLogout>
+  | ReturnType<typeof redirectToRoute>;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Actions>;
 
