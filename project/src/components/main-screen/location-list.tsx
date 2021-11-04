@@ -23,6 +23,8 @@ function LocationList(props: ConnectedComponentProps): JSX.Element {
 
   const {onChangeCity, locations, currentCity } = props;
 
+  console.log(locations);
+
   return (
     <ul className="locations__list tabs__list">
       {locations.map((location) => {
