@@ -11,11 +11,13 @@ import {State} from '../../types/state';
 // import {Actions} from '../../types/action';
 import SortList from './sort-list';
 import { cities } from '../../const';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 
-const mapStateToProps = ({city, offers}: State) => ({
+const mapStateToProps = ({city, offers, isDataLoaded}: State) => ({
   city,
   offers,
+  isDataLoaded,
 });
 
 // const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
@@ -31,7 +33,7 @@ type ConnectedComponentProps = PropsFromRedux;
 
 function MainScreen(props: ConnectedComponentProps): JSX.Element {
 
-  const {city, offers} = props;
+  const {city, offers, isDataLoaded} = props;
   const locations:string[] = [];
   const points:Locations = [];
   const localOffers:Offers = [];
@@ -41,9 +43,17 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
   let currentLocation:City;
 
   const adaptedOffers = offers.map((offer) => {
+    const host = {
+      avatar: offer.host['avatar_url'],
+      name: offer.host.name,
+      isPro: offer.host['is_pro'],
+      id: offer.host.id,
+    };
+
     const adaptedOffer = Object.assign(
       {},
       offer,
+      host,
       {
         isFavorite: offer['is_favorite'],
         isPremium: offer['is_premium'],
@@ -123,30 +133,37 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
             />
           </section>
         </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{localOffers.length} places to stay in {city}</b>
-              <SortList
-                onSortItemClick={onSortItemClick}
-                currentSort={selectedSort}
-              />
-              <OffersList
-                currentSort={selectedSort}
-                localOffers={localOffers}
-                onListItemHover={onListItemHover}
-              />
-            </section>
-            <div className="cities__right-section">
-              <Map
-                location={getCurrentLocation()}
-                points={points}
-                selectedPoint={selectedPoint}
-              />
-            </div>
-          </div>
-        </div>
+
+        {
+          !isDataLoaded ?
+            <LoadingScreen /> :
+            (
+              <div className="cities">
+                <div className="cities__places-container container">
+                  <section className="cities__places places">
+                    <h2 className="visually-hidden">Places</h2>
+                    <b className="places__found">{localOffers.length} places to stay in {city}</b>
+                    <SortList
+                      onSortItemClick={onSortItemClick}
+                      currentSort={selectedSort}
+                    />
+                    <OffersList
+                      currentSort={selectedSort}
+                      localOffers={localOffers}
+                      onListItemHover={onListItemHover}
+                    />
+                  </section>
+                  <div className="cities__right-section">
+                    <Map
+                      location={getCurrentLocation()}
+                      points={points}
+                      selectedPoint={selectedPoint}
+                    />
+                  </div>
+                </div>
+              </div>
+            )
+        }
       </main>
     </div>
   );

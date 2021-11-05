@@ -1,4 +1,4 @@
-import {connect, ConnectedProps} from 'react-redux';
+// import {connect, ConnectedProps} from 'react-redux';
 import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import MainScreen from '../main-screen/main-screen';
@@ -7,29 +7,29 @@ import RoomScreen from '../room-screen/room-screen';
 import SingInScreen from '../sing-in-screen/sing-in-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-import LoadingScreen from '../loading-screen/loading-screen';
-import {isCheckedAuth} from '../../utils';
-import {State} from '../../types/state';
+// import LoadingScreen from '../loading-screen/loading-screen';
+// import {isCheckedAuth} from '../../utils';
+// import {State} from '../../types/state';
 import browserHistory from '../../browser-history';
 
-const mapStateToProps = ({authorizationStatus, isDataLoaded}: State) => ({
-  authorizationStatus,
-  isDataLoaded,
-});
+// const mapStateToProps = ({authorizationStatus, isDataLoaded}: State) => ({
+//   authorizationStatus,
+//   isDataLoaded,
+// });
 
-const connector = connect(mapStateToProps);
+// const connector = connect(mapStateToProps);
 
-type PropsFromRedux = ConnectedProps<typeof connector>;
+// type PropsFromRedux = ConnectedProps<typeof connector>;
 
-function App(props: PropsFromRedux): JSX.Element {
+function App(): JSX.Element {
 
-  const {authorizationStatus, isDataLoaded} = props;
+  // const {authorizationStatus, isDataLoaded} = props;
 
-  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
-    return (
-      <LoadingScreen />
-    );
-  }
+  // if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+  //   return (
+  //     <LoadingScreen />
+  //   );
+  // }
 
   return (
     <BrowserRouter history={browserHistory}>
@@ -56,5 +56,5 @@ function App(props: PropsFromRedux): JSX.Element {
   );
 }
 
-export {App};
-export default connector(App);
+// export {App};
+export default App;

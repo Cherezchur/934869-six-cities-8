@@ -20,7 +20,7 @@ function RoomScreen(props: ConnectedComponentProps): JSX.Element {
   const offer = offers[(+id)];
 
   const {images, title, rating, type, bedrooms, guestsMax,
-    price, householdItems, ownerInformation, description, reviews} = offer;
+    price, goods, host, description, reviews} = offer;
 
   console.log(offer);
 
@@ -104,11 +104,11 @@ function RoomScreen(props: ConnectedComponentProps): JSX.Element {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {householdItems.map((household, householdId) => {
-                    const keyValue = householdId;
+                  {goods.map((good) => {
+                    const keyValue = good;
                     return (
                       <li key={keyValue} className="property__inside-item">
-                        {household}
+                        {good}
                       </li>
                     );
                   })}
@@ -117,20 +117,20 @@ function RoomScreen(props: ConnectedComponentProps): JSX.Element {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={ownerInformation.isPro ? 'property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper' : 'property__avatar-wrapper user__avatar-wrapper'}>
+                  <div className={host.isPro ? 'property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper' : 'property__avatar-wrapper user__avatar-wrapper'}>
                     <img
                       className="property__avatar user__avatar"
-                      src={ownerInformation.avatar}
+                      src={host.avatar}
                       width="74"
                       height="74"
                       alt="Host avatar"
                     />
                   </div>
                   <span className="property__user-name">
-                    {ownerInformation.name}
+                    {host.name}
                   </span>
                   <span className="property__user-status">
-                    {ownerInformation.isPro ? 'Pro' : ''}
+                    {host.isPro ? 'Pro' : ''}
                   </span>
                 </div>
                 <div className="property__description">
