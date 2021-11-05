@@ -38,7 +38,7 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
   const localOffers:Offers = [];
   const [selectedSort, setSelectedSort] = useState('Popular');
   const [selectedPoint, setSelectedPoint] = useState<Location | undefined>(undefined);
-
+  
   let currentLocation:City;
 
   const adaptedOffers = offers.map((offer) => {
@@ -65,6 +65,8 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
   });
 
   const onSortItemClick = (sortItem: string) => setSelectedSort(sortItem);
+
+  let currentLocation:City;
 
   const getCurrentLocation = ():City => {
     cities.forEach((localCity) => {

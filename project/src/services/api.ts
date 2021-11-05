@@ -41,6 +41,5 @@ export const createAPI = (onUnauthorized: UnauthorizedCallback): AxiosInstance =
       return config;
     },
   );
-
   return api;
 };
