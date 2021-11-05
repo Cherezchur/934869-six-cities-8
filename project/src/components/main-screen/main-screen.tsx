@@ -4,11 +4,8 @@ import Map from '../map/map';
 import { City } from '../../types/city';
 import LocationList from './location-list';
 import { useState } from 'react';
-// import {Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
-// import {loadRentalList} from '../../store/action';
 import {State} from '../../types/state';
-// import {Actions} from '../../types/action';
 import SortList from './sort-list';
 import { cities } from '../../const';
 import LoadingScreen from '../loading-screen/loading-screen';
@@ -19,12 +16,6 @@ const mapStateToProps = ({city, offers, isDataLoaded}: State) => ({
   offers,
   isDataLoaded,
 });
-
-// const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
-//   onOffers(offers: Offers) {
-//     dispatch(loadRentalList(offers));
-//   },
-// });
 
 const connector = connect(mapStateToProps);
 
