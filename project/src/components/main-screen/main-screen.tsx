@@ -38,8 +38,6 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
   const localOffers:Offers = [];
   const [selectedSort, setSelectedSort] = useState('Popular');
   const [selectedPoint, setSelectedPoint] = useState<Location | undefined>(undefined);
-  
-  let currentLocation:City;
 
   const adaptedOffers = offers.map((offer) => {
     const host = {
