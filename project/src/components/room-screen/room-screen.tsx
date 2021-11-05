@@ -1,20 +1,26 @@
 import Logo from '../logo/logo';
 import ReviewForm from './review-form';
-import { Offers } from '../../types/offers';
 import { useParams } from 'react-router';
 import dayjs from 'dayjs';
+import {connect, ConnectedProps} from 'react-redux';
+import {State} from '../../types/state';
 
-type RoomScreenProps = {
-  offers: Offers;
-}
+const mapStateToProps = ({offers}: State) => ({
+  offers,
+});
 
-function RoomScreen(props: RoomScreenProps): JSX.Element {
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux;
+
+function RoomScreen(props: ConnectedComponentProps): JSX.Element {
   const {offers} = props;
   const {id} = useParams<{id:string}>();
   const offer = offers[(+id)];
 
-  const {photo, title, rating, housingType, bedroomsNumber, guestsMax,
-    cost, householdItems, ownerInformation, description, reviews} = offer;
+  const {images, title, rating, type, bedrooms, guestsMax,
+    price, goods, host, description, reviews} = offer;
 
   console.log(offer);
 
@@ -50,7 +56,7 @@ function RoomScreen(props: RoomScreenProps): JSX.Element {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {photo.map((src) => {
+              {images.map((src) => {
                 <div className="property__image-wrapper">
                   <img className="property__image" src={src} alt="Photo studio" />
                 </div>;
@@ -82,27 +88,27 @@ function RoomScreen(props: RoomScreenProps): JSX.Element {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {housingType}
+                  {type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {bedroomsNumber} Bedrooms
+                  {bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
                   Max {guestsMax} adults
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;{cost}</b>
+                <b className="property__price-value">&euro;{price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {householdItems.map((household, householdId) => {
-                    const keyValue = householdId;
+                  {goods.map((good) => {
+                    const keyValue = good;
                     return (
                       <li key={keyValue} className="property__inside-item">
-                        {household}
+                        {good}
                       </li>
                     );
                   })}
@@ -111,20 +117,20 @@ function RoomScreen(props: RoomScreenProps): JSX.Element {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={ownerInformation.isPro ? 'property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper' : 'property__avatar-wrapper user__avatar-wrapper'}>
+                  <div className={host.isPro ? 'property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper' : 'property__avatar-wrapper user__avatar-wrapper'}>
                     <img
                       className="property__avatar user__avatar"
-                      src={ownerInformation.avatar}
+                      src={host.avatar}
                       width="74"
                       height="74"
                       alt="Host avatar"
                     />
                   </div>
                   <span className="property__user-name">
-                    {ownerInformation.name}
+                    {host.name}
                   </span>
                   <span className="property__user-status">
-                    {ownerInformation.isPro ? 'Pro' : ''}
+                    {host.isPro ? 'Pro' : ''}
                   </span>
                 </div>
                 <div className="property__description">
@@ -279,4 +285,5 @@ function RoomScreen(props: RoomScreenProps): JSX.Element {
   );
 }
 
-export default RoomScreen;
+export {RoomScreen};
+export default connector(RoomScreen);

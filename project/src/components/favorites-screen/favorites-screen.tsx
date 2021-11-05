@@ -1,13 +1,31 @@
 import Logo from '../logo/logo';
 import { Offers } from '../../types/offers';
 import LocationItem from './location-item';
-import { Locations}  from '../../const';
+import {connect, ConnectedProps} from 'react-redux';
+import {State} from '../../types/state';
+import { cities } from '../../const';
 
-type FavoriteProps = {
-  offers: Offers;
-}
+const mapStateToProps = ({city, offers}: State) => ({
+  city,
+  offers,
+});
 
-function FavoritesScreen({offers}:FavoriteProps): JSX.Element {
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux;
+
+function FavoritesScreen(props: ConnectedComponentProps): JSX.Element {
+
+  const { city, offers} = props;
+
+  const locations:string[] = [];
+
+  cities.forEach((localCity) => {
+    locations.push(localCity.name);
+  });
+
+  const locationOffers:Offers = offers.filter((offer) => offer.city.name === city);
 
   return (
     <div className="page">
@@ -42,12 +60,12 @@ function FavoritesScreen({offers}:FavoriteProps): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {Locations.map((city) => {
-                const keyValue = city;
+              {locations.map((location) => {
+                const keyValue = location;
                 return (
                   <LocationItem
                     key={keyValue}
-                    offers={offers}
+                    offers={locationOffers}
                     location={city}
                   />);
               })}
@@ -64,4 +82,5 @@ function FavoritesScreen({offers}:FavoriteProps): JSX.Element {
   );
 }
 
-export default FavoritesScreen;
+export {FavoritesScreen};
+export default connector(FavoritesScreen);
