@@ -4,10 +4,15 @@ export type Image = string;
 
 export type HouseholdItems = string;
 
-export type OwnerInformation = {
+export type Good = string;
+
+export type Host = {
   avatar: string;
   name: string;
   isPro: boolean;
+  id: number;
+  ['avatar_url']?: string;
+  ['is_pro']?: boolean;
 }
 
 export type Location = {
@@ -37,8 +42,8 @@ export type Offer = {
   bedrooms: number;
   guestsMax: number;
   price: number;
-  householdItems: HouseholdItems[];
-  ownerInformation: OwnerInformation;
+  goods: Good[];
+  host: Host;
   location: Location;
   reviews: Reviews;
   ['is_favorite']?: boolean;
