@@ -4,6 +4,8 @@ export type Image = string;
 
 export type Good = string;
 
+export type Good = string;
+
 export type Host = {
   avatar: string;
   name: string;

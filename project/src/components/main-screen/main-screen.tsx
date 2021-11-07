@@ -10,7 +10,6 @@ import SortList from './sort-list';
 import { cities } from '../../const';
 import LoadingScreen from '../loading-screen/loading-screen';
 
-
 const mapStateToProps = ({city, offers, isDataLoaded}: State) => ({
   city,
   offers,
@@ -30,8 +29,6 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
   const localOffers:Offers = [];
   const [selectedSort, setSelectedSort] = useState('Popular');
   const [selectedPoint, setSelectedPoint] = useState<Location | undefined>(undefined);
-
-  let currentLocation:City;
 
   const adaptedOffers = offers.map((offer) => {
     const host = {
@@ -57,6 +54,8 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
   });
 
   const onSortItemClick = (sortItem: string) => setSelectedSort(sortItem);
+
+  let currentLocation:City;
 
   const getCurrentLocation = ():City => {
     cities.forEach((localCity) => {
